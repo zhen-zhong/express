@@ -1,0 +1,8 @@
+# 忽略 node_modules 目录
+node_modules/
+
+# 忽略编译后的文件
+dist/
+
+# 忽略环境配置文件
+.env
