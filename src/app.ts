@@ -14,7 +14,7 @@ const app = express();
 app.use(express.json());
 
 // 使用自定义的响应中间件
-// app.use(responseMiddleware);
+app.use(responseMiddleware);
 
 // 挂载路由
 app.use(router);

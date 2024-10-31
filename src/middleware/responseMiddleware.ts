@@ -6,20 +6,22 @@ interface CustomResponse extends Response {
     sendError: (message?: string, code?: number) => void;
 }
 
-export const responseMiddleware = (req: Request, res: CustomResponse, next: NextFunction): void => {
-    res.sendResponse = (data: any = null, message: string = 'Success', code: number = 200): void => {
-        res.status(code).json({
+export const responseMiddleware = (req: Request, res: Response, next: NextFunction): void => {
+    const customRes = res as CustomResponse; // 使用类型断言
+
+    customRes.sendResponse = (data = null, message = 'Success', code = 200) => {
+        customRes.status(code).json({
             code,
             data,
-            message
+            message,
         });
     };
 
-    res.sendError = (message: string = 'Error', code: number = 500): void => {
-        res.status(code).json({
+    customRes.sendError = (message = 'Error', code = 500) => {
+        customRes.status(code).json({
             code,
             data: null,
-            message
+            message,
         });
     };
 
