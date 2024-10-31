@@ -12,6 +12,6 @@ router.post('/register', register);
 router.post('/login', login);
 
 // 更改密码
-router.post('/change-password', changePassword);
+router.post('/change/password', changePassword);
 
 export default router;

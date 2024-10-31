@@ -1,6 +1,12 @@
 import { Request, Response, NextFunction } from 'express';
 
-export const responseMiddleware = (req: Request, res: Response, next: NextFunction): void => {
+// 扩展 Response 接口
+interface CustomResponse extends Response {
+    sendResponse: (data?: any, message?: string, code?: number) => void;
+    sendError: (message?: string, code?: number) => void;
+}
+
+export const responseMiddleware = (req: Request, res: CustomResponse, next: NextFunction): void => {
     res.sendResponse = (data: any = null, message: string = 'Success', code: number = 200): void => {
         res.status(code).json({
             code,
@@ -19,5 +25,3 @@ export const responseMiddleware = (req: Request, res: Response, next: NextFuncti
 
     next();
 };
-
-
