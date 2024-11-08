@@ -8,9 +8,9 @@ const router = express.Router();
 const apiVersion = process.env.API_VERSION || 'v1'; 
 
 // 挂载用户的路由
-router.use(`/api/${apiVersion}`, userRoutes);
+router.use(`/api/${apiVersion}/user`, userRoutes);
 
 // 挂载业务的路由
-router.use(`/api/${apiVersion}`, businessRoutes);
+router.use(`/api/${apiVersion}/business`, businessRoutes);
 
 export default router;

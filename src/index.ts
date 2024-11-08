@@ -1,10 +1,22 @@
-// index.ts入口文件
-import app from './app';  // 引入已经配置好的 Express 应用
+import app from './app';
 
-// 从环境变量中获取端口号，默认是 3000
+const IP = process.env.IP
+
 const port = process.env.PORT || 3000;
 
-// 启动服务器并监听指定端口
+const os = require('os');
+const networkInterfaces = os.networkInterfaces();
+for (const interfaceName in networkInterfaces) {
+    const addresses = networkInterfaces[interfaceName];
+    for (const addressInfo of addresses) {
+        if (addressInfo.family === 'IPv4' && !addressInfo.internal) {
+            console.log(`本机的 IP 地址: ${addressInfo.address}`);
+        }
+    }
+}
+
 app.listen(port, () => {
-    console.log(`Server is running on http://localhost:${port}`);
+    console.log(`Server is running on http://${IP}:${port}`);
 });
+
+
